@@ -1,0 +1,45 @@
+:host {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.main {
+    background-color: antiquewhite;
+    border-radius: 20px;
+    padding: 10px;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+}
+
+.list {
+    margin-bottom: 5px;
+    button {
+        margin-left: 5px;
+    }
+}
+
+ol {
+    margin-right: 22px;
+}
+
+.example-form {
+    display: flex;
+    justify-content: center;
+    button {
+        margin-left: 5px;
+    }
+}
+
+.example-full-width {
+    width: 100%;
+    input {
+        background-color: white;
+    }
+}
+

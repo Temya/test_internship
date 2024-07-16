@@ -1,0 +1,17 @@
+<div class="main-form">
+  <h1>Login</h1>
+  <form class="example-form" *ngIf="formLogin" [formGroup]="formLogin">
+    <mat-form-field class="example-full-width">
+      <mat-label>Login</mat-label>
+      <input type="text" matInput formControlName = "login" placeholder="Ivan">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <mat-label>Password</mat-label>
+      <input type="password" matInput formControlName = "password" placeholder="Ex. pat">
+    </mat-form-field>
+  </form>
+  <div class="buttons">
+    <button (click)="auth()" mat-raised-button>Login</button>
+    <button (click)="goReg()" mat-raised-button>Registration</button>
+  </div>
+</div>
