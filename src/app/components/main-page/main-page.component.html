@@ -1,31 +1,32 @@
-<div class="main" *ngIf="state">
+<div class="main">
     <div class="header"><h1>Todo List</h1></div>
     <form class="example-form">
         <mat-form-field class="example-full-width">
           <mat-label>Text</mat-label>
-          <input type="text" matInput [formControl]="todotext" placeholder="Something">
+          <input type="text" matInput [formControl]="todoText" placeholder="Something">
         </mat-form-field>
         <button (click)="addToDo()" mat-raised-button>Add</button>
       </form>
-    <ol><li *ngFor="let item of todos" class="list">
-        <button (click)="delToDo(item.id)" mat-raised-button>Delete</button>
-        <button (click)="edToDo(item.id)" mat-raised-button>Edit</button>
+    <ol>
+      <li *ngFor="let item of todos" class="list">
+        <button (click)="deleteToDo(item.id)" mat-raised-button>Delete</button>
+        <button (click)="editToDo(item.id)" [matMenuTriggerFor]="menu" mat-raised-button>Edit</button>
         {{item.todo}} <hr >
-    </li>
-    <li *ngFor="let item of secondTodos" class="list">
-        <button disabled mat-raised-button>Delete</button>
-        <button disabled mat-raised-button>Edit</button>
-        {{item.todo}} <hr >
-    </li>
-</ol>
+      </li>
+      <li *ngFor="let item of secondTodos" class="list">
+          <button disabled mat-raised-button>Delete</button>
+          <button disabled mat-raised-button>Edit</button>
+          {{item.todo}} <hr >
+      </li>
+    </ol>
 </div>
 
-<div *ngIf="!state" class="main">
-    <form class="example-form">
-        <mat-form-field class="example-full-width">
-          <mat-label>Text</mat-label>
-          <input type="text" matInput [formControl]="edittodotext" placeholder="Something">
-        </mat-form-field>
-        <button (click)="saveEditToDo()" mat-raised-button>Save</button>
-      </form>
-</div>
+<mat-menu #menu="matMenu">
+  <form class="form">
+    <mat-form-field class="example-full-width">
+      <mat-label>Text</mat-label>
+      <input type="text" matInput [formControl]="editToDoText" placeholder="Something">
+    </mat-form-field>
+    <button (click)="saveEditToDo()" mat-raised-button>Save</button>
+  </form>
+</mat-menu> 

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,7 +10,7 @@ import { BackendService } from 'src/app/services/backend.service';
   styleUrls: ['./registration.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegistrationComponent implements OnInit, OnDestroy {
+export class RegistrationComponent implements OnDestroy {
 
   public formReg = this.fb.group({
     login: this.fb.control("", Validators.required),
@@ -25,9 +25,6 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     private readonly router: Router, 
     private readonly service: BackendService,
     private readonly cdr: ChangeDetectorRef) { }
-
-  ngOnInit(): void {
-  }
 
   public goLog() {
     this.router.navigateByUrl("");

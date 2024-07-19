@@ -14,10 +14,9 @@ export class MainPageComponent implements OnInit, OnDestroy {
 
   public todos: ToDos[] = [];
   public secondTodos: ToDos[] = [];
-  public todotext = new FormControl('');
-  public edittodotext = new FormControl('');
-  public state = true;
-  public editToDo: any;
+  public todoText = new FormControl('');
+  public editToDoText = new FormControl('');
+  public editIput?: ToDos;
 
   private readonly unSubscribe$$ = new Subject<void>();
 
@@ -36,14 +35,13 @@ export class MainPageComponent implements OnInit, OnDestroy {
     });
   }
 
-  public delToDo(id: number) {
+  public deleteToDo(id: number) {
     this.service.deleteToDo$(id)
     .pipe(takeUntil(this.unSubscribe$$))
     .subscribe((data) => {
       console.log(data);
-      this.cdr.detectChanges();
     });
-    this.todos = this.todos.filter((data) => data.id != id);
+    this.todos = this.todos.filter((data) => data.id !== id);
     console.log(this.todos);
   }
 
@@ -53,11 +51,10 @@ export class MainPageComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unSubscribe$$))
     .subscribe((data) => {
       num = data.total;
-      this.cdr.detectChanges();
     });
     const body = {
       id: num,
-      todo: this.todotext.value,
+      todo: this.todoText.value,
       completed: false,
       userId: this.service.userId
     }
@@ -65,28 +62,24 @@ export class MainPageComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.unSubscribe$$))
     .subscribe((data) => {
       console.log(data);
-      this.cdr.detectChanges();
     });
     this.secondTodos.push(body);
-    this.todotext.setValue("");
+    this.todoText.setValue("");
   }
 
-  public edToDo(id: number) {
-    this.state = false;
-    this.editToDo = this.todos.find((data) => data.id == id);
-    console.log(this.editToDo);
-    this.edittodotext.setValue(this.editToDo.todo);
+  public editToDo(id: number) {
+    this.editIput = this.todos.find((data) => data.id == id);
+    console.log(this.editIput);
+    this.editToDoText.setValue(this.editIput?.todo);
   }
 
   public saveEditToDo() {
-    this.service.editToDo$(this.edittodotext.value, this.editToDo.id)
+    this.service.editToDo$(this.editToDoText.value, this.editIput!.id)
     .pipe(takeUntil(this.unSubscribe$$))
     .subscribe((data) => {
       console.log(data);
-      this.cdr.detectChanges()
-    ;});
-    this.todos.map((data) => {if(data.id == this.editToDo.id){data.todo = this.edittodotext.value}})
-    this.state = true;
+    });
+    this.todos.map((data) => {if(data.id == this.editIput?.id){data.todo = this.editToDoText.value}})
   }
 
   public ngOnDestroy(): void {

@@ -29,7 +29,6 @@ export class LoginComponent implements OnInit, OnDestroy{
     .pipe(takeUntil(this.unSubscribe$$))
     .subscribe((data) => {
       console.log(data);
-      this.cdr.detectChanges();
     });
   }
 
